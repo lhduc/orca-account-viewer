@@ -3,7 +3,7 @@
 An [Orca](https://github.com/stablyai/orca) plugin that shows **which Claude account each running agent uses**, per workspace.
 
 - **Panel "Claude accounts"** (right sidebar): every workspace with the account of each running Claude tab. Running workspaces first, idle ones below, plus the account new tabs will start on.
-- **Status bar item**: `workspace: account` for the workspace you are looking at, e.g. `my-repo (main): me ×2 · work`.
+- **Status bar item**: `Agent: account` for the workspace you are looking at, e.g. `Claude: me ×2 · work` (`Claude: -` when none runs). Hover for the workspace name and each tab. Only Claude is detected so far.
 
 Read-only. No network, no writes, no token access.
 

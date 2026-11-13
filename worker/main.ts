@@ -9,6 +9,7 @@ import type { Activate } from 'orca/worker'
 import type { TabAccount, WorkspaceAccounts } from '../src/protocol'
 
 const SUPPORTED = process.platform === 'darwin'
+const AGENT = 'Claude'
 const ORCA_DATA = join(homedir(), 'Library/Application Support/orca')
 const PROFILES = join(ORCA_DATA, 'claude-profiles')
 
@@ -158,8 +159,9 @@ const activate: Activate = async (orca) => {
       return
     }
     const here = (await claudeTabs().catch(() => [])).filter((t) => focus!.terminals.has(t.terminalId))
-    const text = here.length ? `${focus.name}: ${summary(here.map((t) => shortName(t.account)))}` : `${focus.name}: no Claude`
-    const tooltip = here.map((t) => `${t.name || 'Claude'}: ${t.account}`).join('\n').slice(0, 256)
+    // `Agent: account`; Claude is the only agent detected so far.
+    const text = `${AGENT}: ${here.length ? summary(here.map((t) => shortName(t.account))) : '-'}`
+    const tooltip = [focus.name, ...here.map((t) => `${t.name || AGENT}: ${t.account}`)].join('\n').slice(0, 256)
     await orca.host.call('statusBar.update', {
       id: 'account',
       text,
