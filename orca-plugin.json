@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/stablyai/orca/main/docs/schemas/plugins/orca-plugin.v2.schema.json",
+  "manifestVersion": 2,
+  "execution": "trusted-worker",
+  "id": "account-viewer",
+  "name": "Account Viewer",
+  "version": "0.1.0",
+  "description": "Read-only: shows which Claude account each Orca workspace's running agents use. macOS only.",
+  "license": "MIT",
+  "engines": {
+    "orca": ">=1.4.248"
+  },
+  "pluginApi": 1,
+  "main": "worker/main.ts",
+  "contributes": {
+    "panels": [
+      {
+        "id": "accounts",
+        "title": "Claude accounts",
+        "icon": "agent",
+        "entry": "src/panel.tsx",
+        "ui": "components"
+      }
+    ],
+    "events": [
+      {
+        "on": "workspace.changed"
+      }
+    ],
+    "commands": [
+      {
+        "id": "showPanel",
+        "title": "Claude accounts: show panel",
+        "action": "sidebar.right.toggle"
+      }
+    ],
+    "statusBarItems": [
+      {
+        "id": "account",
+        "icon": "agent",
+        "text": "Claude: -",
+        "command": "showPanel"
+      }
+    ]
+  },
+  "capabilities": [
+    {
+      "kind": "workspace:read"
+    }
+  ]
+}
