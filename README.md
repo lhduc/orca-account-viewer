@@ -38,7 +38,7 @@ orca plugin update
 ## Uninstall
 
 ```bash
-orca plugin uninstall local.account-viewer
+orca plugin uninstall lhduc.account-viewer
 ```
 
 ## What it reads and why
